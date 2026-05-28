@@ -1,0 +1,22 @@
+.header {
+    width: 100vw;
+    min-height: 100px;
+    background-color: rgb(180, 180, 180);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.divContainer {
+    padding: 0 20px 20px;
+    display: flex;
+    gap: 29px;
+}
+
+.link {
+  color: #2672a5;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}

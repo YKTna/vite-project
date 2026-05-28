@@ -11,7 +11,7 @@ const textOnPage = {
   'btn4': 'Текст 4'
 }
 
-export default function Header() {
+export default function Main() {
   const [contentType, setContentType] = useState(null)
 
   function handleClick(type) {

@@ -18,7 +18,6 @@ export default function Tasks() {
   const [sortingTypeName, setSortingTypeName] = useState('ASC');
   const [value, setValue] = useState('');
 
-
   const func = ((r) => {
     setArrTasks(r)
     localStorage.setItem('myKey', JSON.stringify(r))
