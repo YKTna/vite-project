@@ -1,0 +1,25 @@
+.container {
+    margin: 0 auto;
+    padding: 10px 0px;
+    max-width: 500px;
+    width: 100%;
+    background-color: #dbdbdb;
+}
+
+.controlLabel {
+    display: block;
+    margin-bottom: 10px; 
+}
+
+.controlInput, .controlSelect {
+    padding: 20px 10px;
+    border-radius: 10px;
+    width: 300px;
+    border: none;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.controlButton {
+    padding: 10px;
+}
