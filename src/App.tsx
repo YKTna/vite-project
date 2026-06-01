@@ -1,9 +1,8 @@
 import './App.css'
-import About from './components/About/About';
-import Basket from './components/Basket/Basket';
-import Footer from './components/Footer/Footer';
-import Header from './components/Header/Header';
-import Main from './components/Main'
+import About from './components/About/About.tsx';
+import Basket from './components/Basket/Basket.tsx';
+import Header from './components/Header/Header.tsx';
+import Main from './components/Main.tsx';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 

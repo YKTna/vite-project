@@ -2,7 +2,13 @@ import React from 'react';
 import { useEffect, useState } from 'react'
 import classes from './Footer.module.css'
 
-export default function Footer({info}) {
+interface FooterProps {
+  info: {
+    copyright: string;
+  };
+}
+
+export default function Footer({info}: FooterProps) {
   return (
     <footer className={classes.footer}>
       <p>{info.copyright}</p>

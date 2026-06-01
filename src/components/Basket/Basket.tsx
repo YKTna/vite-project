@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Footer from '../Footer/Footer'
+import Footer from '../Footer/Footer.tsx'
 
 export default function Basket() {
   const basketFooter = {

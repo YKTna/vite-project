@@ -1,7 +1,14 @@
 import classes from './Tasks.module.css'
 import { useEffect, useState } from 'react'
 
-  const arr = [
+  interface Task {
+    id: number;
+    name: string;
+    isChecked: boolean;
+    end: string;
+  }
+
+  const arr: Task[] = [
     {id: 1, name: 'Вытереть пыль', isChecked: false, end: '29.05.2026'},
     {id: 2, name: 'Помыть посуду', isChecked: false, end: '26.05.2026'},
     {id: 4, name: 'Погладить', isChecked: false, end: '30.05.2026'}, 
@@ -18,7 +25,7 @@ export default function Tasks() {
   const [sortingTypeName, setSortingTypeName] = useState('ASC');
   const [value, setValue] = useState('');
 
-  const func = ((r) => {
+  const func = ((r: Task[]) => {
     setArrTasks(r)
     localStorage.setItem('myKey', JSON.stringify(r))
   })
@@ -31,7 +38,7 @@ export default function Tasks() {
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const year = date.getFullYear();
       const formattedDate = `${day}.${month}.${year}`;
-      const obj = {id: arrTasks.length + 1, name: task, end: formattedDate}
+      const obj = {id: arrTasks.length + 1, name: task, end: formattedDate, isChecked: false}
       p.push(obj)
       func(p)
       setTask('')
@@ -40,8 +47,8 @@ export default function Tasks() {
 
   };
 
-  const handleDeleteTask = (id) => {
-    const filter = arrTasks.filter((el) => el.id !== id)
+  const handleDeleteTask = (id: number) => {
+    const filter = arrTasks.filter((el: Task) => el.id !== id)
     func(filter);
   }
 
@@ -73,7 +80,7 @@ export default function Tasks() {
     }
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilteredValue(e.target.value)
   };
 
@@ -83,29 +90,29 @@ export default function Tasks() {
     return res;
   }
 
-  const dateHalfEnd = (e) => {
+  const dateHalfEnd = (e: string) => {
     const now = new Date();
     const [day, month, year] = e.split('.');
-    const dateObject = new Date(year, month - 1, day);
-    const res =  Math.abs(dateObject - now)
+    const dateObject = new Date(Number(year), Number(month) - 1, Number(day));
+    const res =  Math.abs(dateObject.getTime() - now.getTime())
     const resDays = Math.ceil(res / (1000 * 60 * 60 * 24));
     if(resDays <= 3) {
       return true
     }
   }
 
-  const dateEnd = (e) => {
+  const dateEnd = (e: string) => {
     const now = new Date();
     const [day, month, year] = e.split('.');
-    const dateObject = new Date(year, month - 1, day);
-    const res =  Math.abs(dateObject - now)
+    const dateObject = new Date(Number(year), Number(month) - 1, Number(day));
+    const res =  Math.abs(dateObject.getTime() - now.getTime())
     const resDays = Math.ceil(res / (1000 * 60 * 60 * 24));
     if(resDays == 0) {
       return true
     }
   }
 
-  const checked = (el, id) => {
+  const checked = (el: Task, id: number) => {
     const res = arrTasks.map((e) => {
       if(e.id == id) {
         if(e.isChecked === false) {
@@ -134,7 +141,7 @@ export default function Tasks() {
         <input 
           type="checkbox" 
           checked={item.isChecked}
-          onChange={(e) => checked(e, item.id)}
+          onChange={() => checked(item, item.id)}
         />
       </td>
       <td className={classes.border}>

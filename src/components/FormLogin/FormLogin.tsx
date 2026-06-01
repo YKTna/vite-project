@@ -6,10 +6,11 @@ export default function FormLogin() {
   const [color, setColor] = useState('red')
   const [hasError, sethasError] = useState(false)
 
-  function handlerNameChange(event) {
+  function handlerNameChange(event: React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value)
     sethasError(event.target.value.trim().length === 0)
   }
+
   return (
     <section className={classes.container}>
       <form action="">
@@ -22,7 +23,7 @@ export default function FormLogin() {
           value={name}
           onChange={handlerNameChange}
           style={{
-            border: hasError ? '1px solid red' : null
+            border: hasError ? '1px solid red' : undefined
           }}
         />
         <select 
