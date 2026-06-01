@@ -1,7 +1,29 @@
 .container {
-    margin: 0 auto;
-    padding: 10px 0px;
     width: 100%;
     min-height: 70vh;
-    background-color: #5ce0f1;
+    background-color: #5e5e5e;
+    padding: 20px;
+}
+
+.containerLinks {
+    margin: 20px auto;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.divLink {
+    display: flex;
+    align-items: center;
+    gap: 15px
+}
+
+.cWhite {
+    color: rgb(209, 209, 209);
+}
+
+.link {
+    color: rgb(209, 209, 209);
 }

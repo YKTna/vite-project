@@ -2,6 +2,7 @@ import FormLogin from './FormLogin/FormLogin'
 import MenuItem from './MenuItem/MenuItem'
 import { useState } from 'react'
 import Tasks from './Tasks/Tasks'
+import Footer from './Footer/Footer'
 
 const data = ['Home', 'About as', 'Servoces', 'Contacts']
 const textOnPage = {
@@ -13,12 +14,14 @@ const textOnPage = {
 
 export default function Main() {
   const [contentType, setContentType] = useState(null)
+  const altText = 'Text'
+  const mainFooter = {
+    copyright: '© 2026 О нас. Мы работаем для вас.'
+  }
 
   function handleClick(type) {
     setContentType(type)
   }
-
-  const altText = 'Text'
 
   return (
     <>
@@ -44,6 +47,7 @@ export default function Main() {
         
         {contentType ? (<p>{textOnPage[contentType]}</p>) : (<p>Выполните клик по кнопке</p>)} */}
         <Tasks />
+        <Footer info={mainFooter} />
       </header>
       {/* <FormLogin /> */}
     </>
