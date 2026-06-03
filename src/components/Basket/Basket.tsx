@@ -3,7 +3,7 @@ import Footer from '../Footer/Footer.tsx'
 
 export default function Basket() {
   const basketFooter = {
-    copyright: '© 2026 О нас. Все получится.'
+    copyright: '© 2026. Все получится.'
   }
 
   return (

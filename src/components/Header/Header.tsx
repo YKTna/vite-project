@@ -8,6 +8,7 @@ export default function Header() {
       <div className={classes.divContainer}>
         <a href="/" className={classes.link}>Главная</a>
         <a href="/about" className={classes.link}>О нас</a>
+        <a href="/products" className={classes.link}>Продукты</a>
         <a href="/basket" className={classes.link}>🛒 Корзина</a>
       </div>
     </header>

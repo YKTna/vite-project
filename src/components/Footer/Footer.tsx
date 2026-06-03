@@ -15,5 +15,3 @@ export default function Footer({info}: FooterProps) {
     </footer>
   )
 }
-
-// © 
