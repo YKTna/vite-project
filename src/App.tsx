@@ -6,6 +6,7 @@ import Header from './components/Header/Header.tsx';
 import Main from './components/Main.tsx';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ProductsPage from './components/Products/Products.tsx';
+import Home from './components/Home/Home.tsx';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           {/* подстановочный путь */}
           <Route path="/" element={<Main />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/basket" element={<Basket />} />

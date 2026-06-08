@@ -1,44 +1,45 @@
 import { useEffect, useState } from 'react'
 import classes from './SectionAbout.module.css'
 import Footer from '../../Footer/Footer.tsx'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux.hooks.tsx'
+import { getTitle, getMapLink, getArrLink, getFooter, setTitle, setFooter } from '../../../store/about.tsx'
 
 export default function SectionAbout() {
-  const aboutFooter = {
-    copyright: '© 2026 О нас. Год лошади.'
+  const aboutFooter = useAppSelector(getFooter)
+  const title = useAppSelector(getTitle)
+  const mapLink = useAppSelector(getMapLink)
+  const arrLink = useAppSelector(getArrLink)
+  console.log(aboutFooter)
+
+  const dispatch = useAppDispatch()
+
+  const handle = () => {
+    dispatch(setTitle('влмтдвмтл'))
   }
+
+  const handleFooter = () => {
+    dispatch(setFooter({copyright: 'влмтдвмтл'}))
+  }
+
+
   return (
     <>
       <section className={classes.container}>
-        <h2 className={classes.cWhite}>Как найти нас в социальных сетях:</h2>
+        <h2 className={classes.cWhite}>{title}</h2>
+        <button onClick={handle}>Поменять</button>
         <div className={classes.containerLinks}>
-          <div className={classes.divLink}>
-            <img src='./vk.svg' alt="Логотип вк" />
-            <a href="#" className={classes.link}>Ссылка на наш паблик</a>
-          </div>
-          <div className={classes.divLink}>
-            <img src='./maks.svg' alt="Логотип макс" />
-            <a href="#" className={classes.link}>Ссылка на наш Макс</a>
-          </div>
-          <div className={classes.divLink}>
-            <img src='./inst.svg' alt="Логотип Инстаграмм" />
-            <a href="#" className={classes.link}>Ссылка на наш Инстаграмм</a>
-          </div>
-          <div className={classes.divLink}>
-            <img src='./youTube.svg' alt="Логотип Ютуб" />
-            <a href="#" className={classes.link}>Ссылка на наш Ютуб</a>
-          </div>
-          <div className={classes.divLink}>
-            <img src='./telega.svg' alt="Логотип Телеграм" />
-            <a href="#" className={classes.link}>Ссылка на наш Телеграм</a>
-          </div>
-          <div className={classes.divLink}>
-            <img src='./twitter.svg' alt="Логотип Твиттер" />
-            <a href="#" className={classes.link}>Ссылка на наш Твиттер</a>
-          </div>
+          {arrLink.map((item, index) => (
+            <div className={classes.divLink}  key={index}>
+              <img src={item.src} alt={item.alt} />
+              <a href="#" className={classes.link}>{item.name}</a>
+            </div>
+          ))}
         </div>
-        <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A3edec1e6966efbf16dba8b1a4993aa6e978615cce943105fa27d00da3ceeb53c&amp;source=constructor" style={{ border: 'none' }} width="500" height="500" ></iframe>
+        <iframe src={mapLink} style={{ border: 'none' }} width="500" height="500" ></iframe>
       </section>
       <Footer info={aboutFooter} />
+      <button onClick={handleFooter}>Поменять</button>
+
     </>
   )
 }
