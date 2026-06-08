@@ -27,7 +27,6 @@ export default function Home() {
   const [arrTasks, setArrTasks] = useState(arr);
   const [sortingType, setSortingType] = useState('ASC');
   const [sortingTypeName, setSortingTypeName] = useState('ASC');
-  const [value, setValue] = useState('');
 
   const func = ((r: Task[]) => {
     setArrTasks(r)
