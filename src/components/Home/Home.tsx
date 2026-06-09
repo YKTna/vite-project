@@ -1,6 +1,6 @@
 import classes from './Home.module.css'
 import { useAppDispatch, useAppSelector } from "../../hooks/redux.hooks.tsx"
-import { getArrTable, getTitle, addTask, setTaskTitle, deleteTask, sortingTypeNumber, sortingNumber, sortingTypeName, sortingName, ArrTable } from "../../store/task.tsx"
+import { getArrTable, getTitle, addTask, setTaskTitle, deleteTask, sortingTypeNumber, sortingNumber, sortingTypeName, sortingName, ArrTable, checked } from "../../store/task.tsx"
 import { useEffect, useState } from 'react'
 
 
@@ -45,10 +45,23 @@ export default function Home() {
     }
   }, [filteredValue, arrTable])
 
+  const handleChecked = ( id: number) => {
+    dispatch(checked(id))
+  }
+
   const rows = filteredArray.map(function(item) {
     return <tr key={item.id}>
       <td className={classes.border}>{item.id}</td>
-      <td className={classes.border}>{item.name}</td>
+      <td className={`${classes.border}
+        ${item.isChecked ? classes.cancel : ''}`}
+      >{item.name}</td>
+      <td className={classes.border}>
+        <input 
+          type="checkbox" 
+          checked={item.isChecked}
+          onChange={() => handleChecked(item.id)}
+        />
+      </td>
       <td className={classes.border}>
         <button onClick={() => handleDelete(item.id)}>Удалить</button>
       </td>
@@ -75,6 +88,7 @@ export default function Home() {
           <tr>
             <td className={`${classes.border} ${classes.bold}`}>Номер</td>
             <td className={`${classes.border} ${classes.bold}`}>Название</td>
+            <td className={`${classes.border} ${classes.bold}`}>Выполнение</td>
             <td className={`${classes.border} ${classes.bold}`}>Удаление</td>
           </tr>
         </thead>

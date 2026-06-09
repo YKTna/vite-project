@@ -3,7 +3,8 @@ import { RootState } from './store.tsx'
 
 export interface ArrTable {
   id: number,
-  name: string
+  name: string,
+  isChecked: boolean
 }
 
 
@@ -21,11 +22,11 @@ export interface TaskState {
 const initialState: TaskState = {
   title: 'Заголовок', // Начальное состояние 0
   arrTable: [
-    {id: 1, name: 'Один'},
-    {id: 2, name: 'Два'},
-    {id: 3, name: 'Три'},
-    {id: 4, name: 'Четыре'},
-    {id: 5, name: 'Пять'}
+    {id: 1, name: 'Один', isChecked: false},
+    {id: 2, name: 'Два', isChecked: false},
+    {id: 3, name: 'Три', isChecked: false},
+    {id: 4, name: 'Четыре', isChecked: false},
+    {id: 5, name: 'Пять', isChecked: false}
   ],
   sortingTypeNumber: true,
   sortingTypeName: true
@@ -45,7 +46,7 @@ export const taskSlice = createSlice({
     addTask: (state, action: { payload: string }) => { // Обращаемся через state
       if(action.payload != '') {
         const newArr = [...state.arrTable]
-        const obj = {id: newArr.length + 1, name: action.payload}
+        const obj = {id: newArr.length + 1, name: action.payload, isChecked: false}
         newArr.push(obj)
         state.arrTable = newArr
       }
@@ -80,6 +81,22 @@ export const taskSlice = createSlice({
         state.sortingTypeName = true
       }
     },
+    checked: (state, action: { payload: number }) => { // Обращаемся через state
+      const res = state.arrTable.map((e) => {
+        if(e.id == action.payload) {
+          if(e.isChecked === false) {
+            e.isChecked = true
+            return e
+          } else {
+            e.isChecked = false
+            return e
+          }
+        } else {
+          return e
+        }
+      })
+      state.arrTable = res
+    },
   },
 })
 
@@ -93,7 +110,7 @@ export const sortingTypeName = (state: RootState) => state.task.sortingTypeName;
 
 
 
-export const { setTaskTitle, addTask, deleteTask, sortingNumber, sortingName } = taskSlice.actions;
+export const { setTaskTitle, addTask, deleteTask, sortingNumber, sortingName, checked } = taskSlice.actions;
 
 
 
