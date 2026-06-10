@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 
 export default function Home() {
   const [addInputValue, setAddInputValue] = useState('')
+  const [dateTask, setDateTask] = useState('');
   const [filteredValue, setFilteredValue] = useState('');
   const [filteredArray, setFilteredArray] = useState<ArrTable[]>([]);
   const title = useAppSelector(getTitle)
@@ -15,7 +16,10 @@ export default function Home() {
   }
   const arrTable = useAppSelector(getArrTable)
   const handleArr = () => {
-    dispatch(addTask(addInputValue))
+    dispatch(addTask({
+      addInputValue: addInputValue, 
+      dateTask: dateTask
+  }))
     setAddInputValue('')
   }
   const handleDelete = (id: number) => {
@@ -49,12 +53,46 @@ export default function Home() {
     dispatch(checked(id))
   }
 
+  const dateHalfEnd = (e: string) => {
+    const now = new Date();
+    const [day, month, year] = e.split('.');
+    const dateObject = new Date(Number(year), Number(month) - 1, Number(day));
+    const res =  Math.abs(dateObject.getTime() - now.getTime())
+    const resDays = Math.ceil(res / (1000 * 60 * 60 * 24));
+    if(resDays <= 3) {
+      return true
+    }
+  }
+
+  const dateEnd = (e: string) => {
+    const now = new Date();
+    const [day, month, year] = e.split('.');
+    const dateObject = new Date(Number(year), Number(month) - 1, Number(day));
+    const res =  Math.abs(dateObject.getTime() - now.getTime())
+    const resDays = Math.ceil(res / (1000 * 60 * 60 * 24));
+    if(resDays == 0) {
+      return true
+    }
+  }
+
+  const completed = (e: boolean) => {
+    console.log(e)
+    if(e) {
+
+    }
+  }
+
+
+
   const rows = filteredArray.map(function(item) {
     return <tr key={item.id}>
       <td className={classes.border}>{item.id}</td>
       <td className={`${classes.border}
+        ${dateHalfEnd(item.end) ? classes.halfEnd : ''}
+        ${dateEnd(item.end) ? classes.end : ''}
         ${item.isChecked ? classes.cancel : ''}`}
       >{item.name}</td>
+      <td className={classes.border}>{item.end}</td>
       <td className={classes.border}>
         <input 
           type="checkbox" 
@@ -88,6 +126,7 @@ export default function Home() {
           <tr>
             <td className={`${classes.border} ${classes.bold}`}>Номер</td>
             <td className={`${classes.border} ${classes.bold}`}>Название</td>
+            <td className={`${classes.border} ${classes.bold}`}>Дата окончания</td>
             <td className={`${classes.border} ${classes.bold}`}>Выполнение</td>
             <td className={`${classes.border} ${classes.bold}`}>Удаление</td>
           </tr>
@@ -102,6 +141,13 @@ export default function Home() {
         onChange={(e) => setAddInputValue(e.target.value)} 
         className={classes.taskInput}
         placeholder="Новая задача..."/>
+        <div className={classes.divContainer}>
+          <label>Введите дату завершения:</label>
+          <input
+            type="date"
+            value={dateTask}
+            onChange={(e) => setDateTask(e.target.value)} />
+        </div>
         <button onClick={handleArr} className={classes.taskButton}>Добавить</button>
       </div>
     </div>

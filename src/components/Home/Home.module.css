@@ -70,6 +70,8 @@
 
 .cancel {
     text-decoration: line-through;
+    background-color: #dddddd !important;
+    color: #b9b9b9
 }
 
 .halfEnd {

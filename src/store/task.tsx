@@ -4,6 +4,7 @@ import { RootState } from './store.tsx'
 export interface ArrTable {
   id: number,
   name: string,
+  end: string,
   isChecked: boolean
 }
 
@@ -22,11 +23,11 @@ export interface TaskState {
 const initialState: TaskState = {
   title: 'Заголовок', // Начальное состояние 0
   arrTable: [
-    {id: 1, name: 'Один', isChecked: false},
-    {id: 2, name: 'Два', isChecked: false},
-    {id: 3, name: 'Три', isChecked: false},
-    {id: 4, name: 'Четыре', isChecked: false},
-    {id: 5, name: 'Пять', isChecked: false}
+    {id: 1, name: 'Один', end: '29.05.2026', isChecked: false},
+    {id: 2, name: 'Два', end: '13.06.2026', isChecked: false},
+    {id: 3, name: 'Три', end: '12.06.2026', isChecked: false},
+    {id: 4, name: 'Четыре', end: '10.06.2026', isChecked: false},
+    {id: 5, name: 'Пять', end: '09.06.2026', isChecked: false}
   ],
   sortingTypeNumber: true,
   sortingTypeName: true
@@ -43,10 +44,16 @@ export const taskSlice = createSlice({
     setTaskTitle: (state, action: { payload: string }) => { // Обращаемся через state
       state.title = action.payload;
     },
-    addTask: (state, action: { payload: string }) => { // Обращаемся через state
-      if(action.payload != '') {
+    addTask: (state, action) => { // Обращаемся через state
+      const { addInputValue, dateTask } = action.payload;
+      if(addInputValue != '' && dateTask !== '') {
         const newArr = [...state.arrTable]
-        const obj = {id: newArr.length + 1, name: action.payload, isChecked: false}
+        const date = new Date(dateTask)
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        const formattedDate = `${day}.${month}.${year}`;
+        const obj = {id: newArr.length + 1, name: addInputValue, end: formattedDate, isChecked: false}
         newArr.push(obj)
         state.arrTable = newArr
       }
