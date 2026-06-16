@@ -1,0 +1,87 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "lknkn.",
+      "price": 75000,
+      "description": "Мощный ноутбук для работы и игр",
+      "image": "https://media.istockphoto.com/id/479520746/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%BD%D0%BE%D1%83%D1%82%D0%B1%D1%83%D0%BA-%D1%81-%D0%BF%D1%83%D1%81%D1%82%D1%8B%D0%BC-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%BE%D0%BC-%D0%BD%D0%B0-%D0%B1%D0%B5%D0%BB%D1%8B%D0%B9.jpg?s=612x612&w=0&k=20&c=0z7qtGzc1Yin_luiWf5e61CoZSNzhJMrR4urT-Mn1mw=",
+      "category": "Электроника",
+      "completed": false
+    },
+    {
+      "id": "2",
+      "name": "lknkn.",
+      "price": 5000,
+      "description": "С активным шумоподавлением",
+      "image": "https://i-store.net/_sh/73/7328.jpg",
+      "category": "Электроника",
+      "completed": false
+    },
+    {
+      "id": "3",
+      "name": "lknkn.",
+      "price": 2500,
+      "description": "Высокая точность и быстрый отклик",
+      "image": "https://colapsar.ru/upload/iblock/9eb/9ebb275b565c75ebc2be6db75b723a51.jpg",
+      "category": "Электроника"
+    },
+    {
+      "id": "4",
+      "name": "Умные часы",
+      "price": 15000,
+      "description": "Стильные и функциональные",
+      "image": "https://www.mijia-shop.ru/wp-content/uploads/2021/09/maimo-watch-1.jpg",
+      "category": "Электроника"
+    },
+    {
+      "id": "5",
+      "name": "Планшет",
+      "price": 30000,
+      "description": "Легкий и мощный для работы и развлечений",
+      "image": "https://applestore72.ru/upload/iblock/2bf/2bf5118abfa5e5ade2457d4b9747b7f0.jpg",
+      "category": "Электроника"
+    },
+    {
+      "id": "6",
+      "name": "Фитнес-браслет",
+      "price": 2000,
+      "description": "Следит за вашим здоровьем и активностью",
+      "image": "https://www.mijia-shop.ru/wp-content/uploads/2022/05/pms_1653393475.jpg",
+      "category": "Электроника"
+    },
+    {
+      "id": "7",
+      "name": "Портативная колонка",
+      "price": 4500,
+      "description": "Беспроводная колонка с хорошим звуком",
+      "image": "https://personal-audio.ru/upload/resize_cache/iblock/c9c/ne9fm41oi0v7uxujftccw8s612xhij42/600_600_140cd750bba9870f18aada2478b24840a/klipsch_gig_xl_02.jpg",
+      "category": "Электроника"
+    },
+    {
+      "id": "8",
+      "name": "Камера видеонаблюдения",
+      "price": 8000,
+      "description": "Обеспечивает безопасность дома",
+      "image": "https://ipvs.ru/upload/iblock/297/P1455-LE.png",
+      "category": "Электроника"
+    },
+    {
+      "id": "9",
+      "name": "Детский планшет",
+      "price": 10000,
+      "description": "Безопасный и образовательный",
+      "image": "https://static.abc.ru/unsafe/0x385/abc.ru/upload/catalog/5q/k8/1599950373.35855qk8vxhz1f74jxok0vutiobpmdedwhkokajy.jpg",
+      "category": "Детские товары"
+    },
+    {
+      "id": "10",
+      "name": "Робот-пылесос",
+      "price": 25000,
+      "description": "Автоматическая уборка дома",
+      "image": "https://hobot.ru/upload/resize_cache/webp/upload/iblock/c19/cvi67ga7ispauem5y1z8t9pa15qamkhy/komplekt_robot_pylesos_moyushchiy_hobot_legee_d8_stantsiya_samoochistki_lulu.webp",
+      "category": "Бытовая техника"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './counter.tsx'
 import aboutReducer from './about.tsx'
 import taskReducer from './task.tsx'
+import productsReducer from './products.tsx'
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     about: aboutReducer,
-    task: taskReducer
+    task: taskReducer,
+    products: productsReducer
   },
 })
 

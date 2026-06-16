@@ -1,114 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
-import Footer from '../Footer/Footer.tsx';
-import { Button, Layout, Menu, theme, Card, Col, Row} from 'antd';
+import { useEffect, useState } from 'react';
+import classes from './Products.module.css'
+import { useAppDispatch } from "../../hooks/redux.hooks.tsx"
+import { fetchProducts, toggleProducts } from "../../store/products.tsx"
+import { RootState } from '../../store/store.tsx'; 
+import { useDispatch, useSelector } from 'react-redux';
 
-interface IProduct {
-  id: string;
-  title: string;
-  description: string;
-}
 
-const { Header, Sider, Content } = Layout;
-const ProductsPage: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
-  const ProductsFooter = {
-    copyright: '© 2026. Продукты на выбор.'
-  }
-
-  const [products, setProducts] = useState<IProduct[]>([])
+export default function ProductsPage() {
+  const {status, error, items } = useSelector((state: RootState) => state.products);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    fetch('https://dummyjson.com/products')
-    .then(res => res.json())
-    .then((data) => setProducts(data.products));
-  }, [])
+    dispatch(fetchProducts())
+  }, []);
+
+  const toggle = async (id: number) => {
+    await dispatch(toggleProducts(id))
+    await dispatch(fetchProducts())
+  }
 
   return (
-    <>
-      <Layout>
-        <Sider trigger={null} collapsible collapsed={collapsed}>
-          <div className="demo-logo-vertical" />
-          <Menu
-            theme="dark"
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            items={[
-              {
-                key: '1',
-                icon: <UserOutlined />,
-                label: 'nav 1',
-              },
-              {
-                key: '2',
-                icon: <VideoCameraOutlined />,
-                label: 'nav 2',
-              },
-              {
-                key: '3',
-                icon: <UploadOutlined />,
-                label: 'nav 3',
-              },
-            ]}
-          />
-        </Sider>
-        <Layout>
-          <Header style={{ padding: 0, background: colorBgContainer, display: 'flex' }}>
-            <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              style={{
-                fontSize: '16px',
-                width: 64,
-                height: 64,
-              }}
-            />
-          </Header>
-
-          <Content
-            style={{
-              margin: '24px 16px',
-              padding: 24,
-              minHeight: 280,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            <Row gutter={16}>
-              {products.map((product) => {
-                return (
-                  <Col span={8} key={product.id}>
-                    <Card 
-                    hoverable
-                    style={{ width: 240 }}
-                    cover={
-                      <img
-                        draggable={false}
-                        alt="example"
-                        src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
-                    }>
-                      Card content
-                    </Card>
-                  </Col>
-                )
-              })}
-            </Row>
-          </Content>
-        </Layout>
-      </Layout>
-      <Footer info={ProductsFooter} />
-    </>
+    <div className={classes.container}>
+      <h1>Товары</h1>
+      {status === 'loading' && <h2>Идет загрузка</h2>}
+      {error && <h2>Error: {error}</h2>}
+      <div className={classes.cards}>
+        {items.map(product => (
+          <>
+            <div className={classes.card} key={product.id}>
+              <img src={product.image} />
+              <h3>{product.name}</h3>
+              <p className={classes.text}>{product.description}</p>
+              <p>Цена: {product.price} руб.</p>
+              <button onClick={() => toggle(product.id)}>Изменить</button>
+            </div>
+          </>
+        ))}
+      </div>
+    </div>
   );
-};
-
-export default ProductsPage;
+}
